@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Instructor Scheduling Preferences</title>
+  <link href="SurveyForm.css" rel="stylesheet">
+    <style>
+        textarea:required:invalid, input:required:invalid {
+            background-color: lightyellow;
+        }
+    </style>
+
+    <script> 
+		//JS Form Validation
+		//Workyear validation
+		
+		function validatePoints() {
+			
+		}
+		
+		function validateBacktoback() {
+			if ()
+		}
+		
+	
+		
+		function validateTimetable() {
+			
+		}
+		
+        function validateComments(input) {
+            if (input.value.length < 20) {
+                input.setCustomValidity("You need to comment in more detail, at least 20 characters");
+            } else {
+                input.setCustomValidity(" ");
+                // There is no error. Clear any error message. 
+            }
+        }
+        function validateForm(){
+            if (!Modernizr.input.required){
+                //Get an array that holds all the elements
+                var inputElements=document.getElementById("applicationForm").elements;
+                //Move through the array, checking each element.
+                for (var i=0;i < inputElements.length; i++){
+                    // check if this element is required
+                    if (inputElements[i].hasAttribute("required")){
+                        //if this is required, does it have a value
+                        if (inputElements[i].value ==""){
+                            alert("Custom required field validatin failed. The form will not be submitted");
+                            return false;
+                        }
+                    }
+                }
+                //if you reach this point, everything worked out
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+<h1>Instructor Scheduling Preferences <br> Fall 2022</h1>
+<form  if="applicationForm" action="#" onsubmit="return validateForm(applicationForm)">
+	<fieldset>
+	<p><i>Please complete the form. Mandatory fields are marked with a </i><em>*</em></p>
+	<p>Please indicate your scheduling preferences for the term listed above.  Your preferences will influence your schedule, but they are not the only (nor the highest priority) factor.  The schedule is largely created by a integer linear program, which will take your input literally.  If you leave 8:00 and 4:00 without X's, you will likely be teaching at both those times. <br><br>
+
+	Here is a fairly comprehensive list of the priorities of the ILP, in roughly the order of preference:<br>
+	1. Follow the UWSP standard block structure.<br>
+	2. Follow the STEM scheduling agreement for courses taken by other majors.<br>
+	3. No classes scheduled during department meeting times.<br>
+	4. No instructor scheduled for back-to-back-to-back classes. (Three in a row)<br>
+	5. No instructor scheduled for back-to-back in different buildings.<br>
+	6. Avoid conflicts among upper-level courses that may normally be taken in the same semester.<br>
+	7. Sections of the same course not offered at the same time (except, occasionally, when we want to do this).<br>
+	8. Your personal preferences.<br>
+	9. Courses that fill (109, 111, 112, 119, 225, 226, 209, 230, 255, 356) offered in larger rooms.  The list this applied to is in continual flux.
+	</p>
+	</fieldset>
+	
+	<fieldset>
+      <label for="name">1. Name <em>*</em></label>
+      	<input id="name" placeholder="Andy Felt" autofocus required><br><br>
+	  
+      <label for="note">2. Special Note</label>
+		<textarea id="note" placeholder="For example, I only teach in the evenings." oninput="validateComments(this)"></textarea><br><br>
+
+	  <label for="meeting">3. Expedcted University-level committee meetings</label>
+		<fieldset>
+		<label for="meetingName">Name of meeting</label>
+			<input id="meetingName" type="text">
+		
+		<label for="meetingDate">Date</label>
+			 <label for="meetingMonday">
+			 	<input id="meetingMonday" name="meetingDate" value="MeetingMonday" type="radio">Monday</label>
+			 <label for="meetingTuesday">
+			 	<input id="meetingTuesday" name="meetingDate" value="MeetingTuesday" type="radio">Tuesday</label>		
+			 <label for="meetingWednesday">
+			 	<input id="meetingWednesday" name="meetingDate" value="MeetingWednesday" type="radio">Wednesday</label>
+			 <label for="meetingThursday">
+			 	<input id="meetingThursday" name="meetingDate" value="MeetingThursday" type="radio">Thursday</label>		
+			 <label for="meetingFriday">
+			 	<input id="meetingFriday" name="meetingDate" value="MeetingFriday" type="radio">Friday</label>
+
+	  <label>Comment</label>
+		<textarea id="meetingComment"></textarea>
+		</fieldset>
+	</fieldset>
+	
+	
+	<fieldset>
+	  <label for="fourcrcourse">4. Four-credit courses: do you like or dislike meeting four days in a row? <em>*</em></label>
+		  <label for="likefourdays">
+			  <input id="likefourdays" name="fourcrcourse" value="likefourdays" type="radio">Like four days in a row</label>
+		  <label for="dislikefourdays">
+			  <input id="dislikefourdays" name="fourcrcourse" value="dislikefourdays" type="radio">Dislike four days in a row</label>
+		  <label for="dcfourdays">
+			  <input id="dcfourdays" name="fourcrcourse" value="dcfourdays" type="radio">Don't care</label><br><br>
+
+	  <label for="twoseccourse">5. Two sections of same course: how strongly do you want them on the same days of the week? <em>*</em></label>
+		  <label for="wanttwoseccourse">
+			  <input id="wanttwoseccourse" name="twoseccourse" value="wanttwoseccourse" type="radio">Strongly want same days of week</label>
+		  <label for="dctwoseccourse">
+			  <input id="dctwoseccourse" name="twoseccourse" value="dctwoseccourse" type="radio">Don't care</label><br>
+	</fieldset>
+	
+	
+	<fieldset>
+		<legend>Spending Your Points</legend>
+		<p>You have 10 points (+4, if you have been at UWSP fewer than seven years) to use how you wish.  I tried to make the directions clear, but this form is not automatically checked.  You have an advanced degree. Check your work.  If you use more points than you have (10 or 14), or if you violate other rules, then I will change your input to meet the rules, likely without consulting you.</p><br>
+		
+		<label for="workyear">Please choose one to determine how many points you can use. <em>*</em></label>
+			<label for="fourteenpoints">
+				<input id="fourteenpoints" name="workyear" value="fourteenpoints" type="radio">I have been at UWSP fewer than seven years. -> 14pts</label>
+			<label for="tenpoints">
+				<input id="tenpoints" name="workyear" value="tenpoints" type="radio">I have been at UWSP for seven years or more. -> 10pts</label>		
+	</fieldset>
+	
+	<fieldset>
+	<label for="backtobackpenaltyteachers">6. Penalty for back-to-back classes. The higher number of points you use, the more likely you will be to NOT have back-to-back blocks. So, 0 means, "I don't care if I have back-to-backs," and 14 means, "I really don't want them." </label>
+      <select name="backtobackpenaltyteachers" id="backtobackpenaltyteachers">
+		<option value="backtobackpenaltyteachers0">0</option>
+        <option value="backtobackpenaltyteachers1">1</option>
+        <option value="backtobackpenaltyteachers2">2</option>
+		<option value="backtobackpenaltyteachers3">3</option>
+		<option value="backtobackpenaltyteachers4">4</option>
+        <option value="backtobackpenaltyteachers5">5</option>
+		<option value="backtobackpenaltyteachers6">6</option>
+		<option value="backtobackpenaltyteachers7">7</option>
+        <option value="backtobackpenaltyteachers8">8</option>
+		<option value="backtobackpenaltyteachers9">9</option>
+ 		<option value="backtobackpenaltyteachers10">10</option>
+        <option value="backtobackpenaltyteachers11">11</option>
+		<option value="backtobackpenaltyteachers12">12</option>
+		<option value="backtobackpenaltyteachers13">13</option>
+		<option value="backtobackpenaltyteachers14">14</option>
+      </select><br><br>
+	
+	<label for="backtobackrewardteachers">7. Reward for back-to-back classes. Large number means you really want back-to-backs. Note that it doesn't make sense to put positive points in both this and the previous question. Fill in number of points assigned (0-14).</label>
+	 <select name="backtobackrewardteachers" id="backtobackrewardteachers">
+		<option value="backtobackrewardteachers0">0</option>
+        <option value="backtobackrewardteachers1">1</option>
+        <option value="backtobackrewardteachers2">2</option>
+		<option value="backtobackrewardteachers3">3</option>
+		<option value="backtobackrewardteachers4">4</option>
+        <option value="backtobackrewardteachers5">5</option>
+		<option value="backtobackrewardteachers6">6</option>
+		<option value="backtobackrewardteachers7">7</option>
+        <option value="backtobackrewardteachers8">8</option>
+		<option value="backtobackrewardteachers9">9</option>
+ 		<option value="backtobackrewardteachers10">10</option>
+        <option value="backtobackrewardteachers11">11</option>
+		<option value="backtobackrewardteachers12">12</option>
+		<option value="backtobackrewardteachers13">13</option>
+		<option value="backtobackrewardteachers14">14</option>
+      </select>
+	</fieldset>
+	
+	
+	<fieldset>
+	<label for="dayoffteachers">8. I prefer to have an open day. Note that this will not work if you are teaching a 5-credit course.</label>
+		<label for="dayoffteachers"><input id="dayoffteachers" type="checkbox"> Request open day (2pts).</label><br><br>
+			
+	<label for="daystochoosefrom">9. If you requested an open day, what are the acceptable days? (More options means more likely possible.)</label>
+		 <label for="daystochoosefromMonday">
+			 <input id="daystochoosefromMonday" name="daystochoosefrom" value="daystochoosefromMonday" type="checkbox">Monday</label>
+		 <label for="daystochoosefromTuesday">
+			 <input id="daystochoosefromTuesday" name="daystochoosefrom" value="daystochoosefromTuesday" type="checkbox">Tuesday</label>
+		 <label for="daystochoosefromWednesday">
+			 <input id="daystochoosefromWednesday" name="daystochoosefrom" value="daystochoosefromWednesday" type="checkbox">Wednesday</label>
+		 <label for="daystochoosefromThursday">
+			 <input id="daystochoosefromThursday" name="daystochoosefrom" value="daystochoosefromThursday" type="checkbox">Thursday</label>
+		 <label for="daystochoosefromFriday">
+			 <input id="daystochoosefromFriday" name="daystochoosefrom" value="daystochoosefromFriday" type="checkbox">Friday</label><br><br>
+
+
+	<label for="badpersonaltimes">10. I prefer not to teach during the following times. Each box checked costs 1 point and indicates an undesirable time for you. You may only place X's in three or fewer hours per day. </label>
+	
+	<table height=400>
+        <tr>
+            <th></th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+        <tr>
+            <td>8:00</td>
+            <td><input id="moneight" name="moneight" value="moneight" type="checkbox"> </td>
+            <td><input id="tueseight" name="tueseight" value="tueseight" type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+
+        </tr>
+        <tr>
+            <td>9:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>10:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+
+        </tr>
+        <tr>
+            <td>11:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>12:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>13:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>14:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>15:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+        <tr>
+            <td>16:00</td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+            <td><input type="checkbox"> </td>
+        </tr>
+    </table>
+
+	</fieldset>
+	
+	
+<fieldset>	
+      <textarea id="comments" oninput="validateComments(this)" required></textarea>
+  </fieldset>
+	
+  <p><input type="submit" value="Submit"></p>
+</form>
+</body>
+</html>
